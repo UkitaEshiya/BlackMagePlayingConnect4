@@ -1,4 +1,4 @@
-open CS17SetupGame; 
+open CS17SetupGame;
 open Game; 
 
 module Connect4 = {
@@ -33,19 +33,6 @@ let initialState: string => state =
         State(Ongoing(P1), makeList(boardHeight, (makeList(boardWidth, 0))))
       }; 
 
-  let makeBoard: state => matrix = s => 
-  switch(s) {
-  |State(_, [hd, ...tl]) => [hd, ...tl]
-  |_ => failwith("other")
-  }; 
-
-
-  let rec mainDiagonal: matrix => list(int) = 
-    ma => switch(ma) {
-    |[] => []
-    |[hd, ...tl] => [List.hd(hd), ...mainDiagonal(List.map(List.tl, tl))]
-    }
-
   let gameStatus: state => status =
     inState => {
       let State(p, _) = inState;
@@ -70,14 +57,6 @@ let initialState: string => state =
       };
   
   let makeMove: int => move = num => Move(num); 
-  
-  let checkNthSlot: (int, list(int)) => bool = 
-      (num, lst) =>
-       if (List.nth(lst, num) == 0){
-        true
-      } else {
-        false 
-      }; 
 
 /* generates the columns that are still unfilled (column numbed from right to 
   left, starting from 0)
@@ -107,38 +86,42 @@ checkExpect(makeMoveList([0, 0, 0, 0, 0]),
     inState =>
       switch (inState) {
       | State(_, [hd, ..._]) => 
-        List.map(makeMove, makeMoveList(hd))
+        List.rev_map(makeMove, makeMoveList(hd))
       | State(_, []) => failwith("invalid game state")
       };
 
   checkExpect(legalMoves(State(Ongoing(P1), [[0, 0, 0, 0, 0], [1, 2, 3, 4, 5]])), 
-              [Move(5), Move(4), Move(3), Move(2), Move(1)], 
+              [Move(1), Move(2), Move(3), Move(4), Move(5)], 
               "legalMoves all column open")
-/*
-    let legalMoves: state => list(move) =
-    inState =>
-      switch (inState) {
-      | State(_, [hd, ...tl]) => 
-        if(List.mem(0, List.hd(List.rev([hd, ...tl])))) {
-         [Move(1)]
-        } else {
-          failwith ("board filled, game end in a tie")
-        }
-      | State(_, []) => failwith("invalid game state")
-      };
+
+//return the open row that can have a piece placed in; bottom row is row 0
+  let rec checkOpenRow: (matrix, int) => int = (board, column) => 
+    switch(board){
+    |[hd, ...tl] => if (List.nth(hd, column) == 0){
+      List.length(board)
+    } else {
+      checkOpenRow(tl, column)
+    }; 
+    |[] => failwith("checkOpenRow cannot find open row to drop piece")
+    }; 
+  
+/* procedure to drop piece in board not yet implemented
+  let dropPiece: (matrix, int, int) => matrix = (board, row, column) =>
+    switch(List.nth(List.rev(board), row), column) => 1;
+*/
 
   let nextState: (state, move) => state =
     (inState, inMove) =>
       switch (inState, inMove) {
       | (State(Win(_), _), _)
       | (State(Draw, _), _) => inState
-      | (State(Ongoing(player), x), Move(1)) =>
-        State(otherPlayer(player), (x - 1))
-      | (State(Ongoing(player), x), Move(2)) =>
-        State(otherPlayer(player), (x - 2))     
-      | (State(Ongoing(player), x), Move(3)) =>
-        State(otherPlayer(player), (x - 3))
-      };*/
+      | (State(Ongoing(player), mat), Move(x)) => 
+        if (player == P1) {
+          failwith ("make the corresponding tile 1")
+        } else {
+          failwith("make the corresponding tile -1")
+        }
+      };
 
   let estimateValue: state => float =
     inState =>
@@ -180,8 +163,17 @@ checkExpect(makeMoveList([0, 0, 0, 0, 0]),
         };
       };}
 
+//misc procedures that might come in handy
+
+let rec mainDiagonal: matrix => list(int) = 
+    ma => switch(ma) {
+    |[] => []
+    |[hd, ...tl] => [List.hd(hd), ...mainDiagonal(List.map(List.tl, tl))]
+    }
 
 };
+
+
 /*
 module MyGame : Game = Connect4;
 open Connect4;*/

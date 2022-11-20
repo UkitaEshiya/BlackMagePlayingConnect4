@@ -1,0 +1,49 @@
+rescript = 1
+rule cp
+  command = cp $i $out
+rule touch
+ command = touch $out
+o Demo-Game.cmi : cp ../bs/src/Demo-Game.cmi
+o Demo-Game.cmj : cp ../bs/src/Demo-Game.cmj
+o Demo-Game.cmt : cp ../bs/src/Demo-Game.cmt
+o Demo.re : cp ../../src/Demo.re
+o Game-Game.cmi : cp ../bs/src/Game-Game.cmi
+o Game-Game.cmj : cp ../bs/src/Game-Game.cmj
+o Game-Game.cmt : cp ../bs/src/Game-Game.cmt
+o Game.re : cp ../../src/Game.re
+o Player-Game.cmi : cp ../bs/src/Player-Game.cmi
+o Player-Game.cmj : cp ../bs/src/Player-Game.cmj
+o Player-Game.cmt : cp ../bs/src/Player-Game.cmt
+o Player.re : cp ../../src/Player.re
+o connect-Game.cmi : cp ../bs/src/connect-Game.cmi
+o connect-Game.cmj : cp ../bs/src/connect-Game.cmj
+o connect-Game.cmt : cp ../bs/src/connect-Game.cmt
+o connect.re : cp ../../src/connect.re
+o Referee-Game.cmi : cp ../bs/src/Referee-Game.cmi
+o Referee-Game.cmj : cp ../bs/src/Referee-Game.cmj
+o Referee-Game.cmt : cp ../bs/src/Referee-Game.cmt
+o Referee.re : cp ../../src/Referee.re
+o AIPlayer-Game.cmi : cp ../bs/src/AIPlayer-Game.cmi
+o AIPlayer-Game.cmj : cp ../bs/src/AIPlayer-Game.cmj
+o AIPlayer-Game.cmt : cp ../bs/src/AIPlayer-Game.cmt
+o AIPlayer.re : cp ../../src/AIPlayer.re
+o Connect4-Game.cmi : cp ../bs/src/Connect4-Game.cmi
+o Connect4-Game.cmj : cp ../bs/src/Connect4-Game.cmj
+o Connect4-Game.cmt : cp ../bs/src/Connect4-Game.cmt
+o Connect4.re : cp ../../src/Connect4.re
+o HumanPlayer-Game.cmi : cp ../bs/src/HumanPlayer-Game.cmi
+o HumanPlayer-Game.cmj : cp ../bs/src/HumanPlayer-Game.cmj
+o HumanPlayer-Game.cmt : cp ../bs/src/HumanPlayer-Game.cmt
+o HumanPlayer.re : cp ../../src/HumanPlayer.re
+o CS17SetupGame-Game.cmi : cp ../bs/src/CS17SetupGame-Game.cmi
+o CS17SetupGame-Game.cmj : cp ../bs/src/CS17SetupGame-Game.cmj
+o CS17SetupGame-Game.cmt : cp ../bs/src/CS17SetupGame-Game.cmt
+o CS17SetupGame.re : cp ../../src/CS17SetupGame.re
+o ReadLineSyncTest-Game.cmi : cp ../bs/src/ReadLineSyncTest-Game.cmi
+o ReadLineSyncTest-Game.cmj : cp ../bs/src/ReadLineSyncTest-Game.cmj
+o ReadLineSyncTest-Game.cmt : cp ../bs/src/ReadLineSyncTest-Game.cmt
+o ReadLineSyncTest.re : cp ../../src/ReadLineSyncTest.re
+o Game.cmi : cp ../bs/Game.cmi
+o Game.cmj : cp ../bs/Game.cmj
+o Game.cmt : cp ../bs/Game.cmt
+build install.stamp : touch Demo-Game.cmi Demo-Game.cmj Game-Game.cmi Game-Game.cmj Player-Game.cmi Player-Game.cmj connect-Game.cmi connect-Game.cmj Referee-Game.cmi Referee-Game.cmj AIPlayer-Game.cmi AIPlayer-Game.cmj Connect4-Game.cmi Connect4-Game.cmj HumanPlayer-Game.cmi HumanPlayer-Game.cmj CS17SetupGame-Game.cmi CS17SetupGame-Game.cmj ReadLineSyncTest-Game.cmi ReadLineSyncTest-Game.cmj Game.cmi Game.cmj

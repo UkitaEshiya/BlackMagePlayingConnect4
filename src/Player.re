@@ -1,5 +1,5 @@
 open Game;
-/*
+
 /* describes either a human or AI player,
  * which selects the next move */
 module type Player = {
@@ -7,4 +7,4 @@ module type Player = {
   /* given a state, selects a move */
   let nextMove: PlayerGame.state => PlayerGame.move;
   let playerName: string;
-};*/
+};

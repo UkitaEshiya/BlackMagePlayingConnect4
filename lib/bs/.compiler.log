@@ -1,0 +1,115 @@
+#Start(1668909969570)
+
+  Warning number 109 (configured as error) 
+  /Users/gahalahd/Documents/cs17/project/game/Connect4/src/connect.re:274:1-296:1
+  
+  272 │ };
+  273 │ 
+  274 │ {
+  275 │   let board = loadBoard(Sys.argv);
+    . │ ...
+  295 │   };
+  296 │ };
+  297 │ /* vim: set expandtab ts=8 sts=4 shiftwidth=4 */
+  
+  Toplevel expression is expected to have unit type.
+  
+
+  Warning number 27
+  /Users/gahalahd/Documents/cs17/project/game/Connect4/src/connect.re:192:38-41
+  
+  190 ┆ };
+  191 ┆ switch killerMoves {
+  192 ┆ | [(killerMove, killerScore), ...rest] => (Some(killerMove), killerSc
+        ore)
+  193 ┆ | [] =>
+  194 ┆   let bestScores =
+  
+  unused variable rest.
+  
+
+  Warning number 27
+  /Users/gahalahd/Documents/cs17/project/game/Connect4/src/connect.re:203:18-22
+  
+  201 ┆ /* when loss is certain, avoid forfeiting the match, by shifting scor
+        es by depth... */
+  202 ┆ |> List.map(
+  203 ┆      ((bmove, bscore)) => {
+  204 ┆        let shiftedScore =
+  205 ┆          switch bscore {
+  
+  unused variable bmove.
+  
+
+  Warning number 27
+  /Users/gahalahd/Documents/cs17/project/game/Connect4/src/connect.re:250:15-16
+  
+  248 ┆ switch l {
+  249 ┆ | [] => false
+  250 ┆ | [true, ...xs] => true
+  251 ┆ | [false, ...xs] => any(xs)
+  252 ┆ };
+  
+  unused variable xs.
+  
+
+  Warning number 27
+  /Users/gahalahd/Documents/cs17/project/game/Connect4/src/connect.re:288:14-18
+  
+  286 ┆   (-1);
+  287 ┆ } else {
+  288 ┆   let (mv, score) = abMinimax(true, 1, maxDepth, board);
+  289 ┆   switch mv {
+  290 ┆   | Some(column) =>
+  
+  unused variable score.
+  
+
+  Warning number 33
+  /Users/gahalahd/Documents/cs17/project/game/Connect4/src/Connect4.re:2:1-9
+  
+  1 │ open CS17SetupGame;
+  2 │ open Game; 
+  3 │ 
+  4 │ module Connect4 = {
+  
+  unused open Game.Game.
+  
+
+  Warning number 27
+  /Users/gahalahd/Documents/cs17/project/game/Connect4/src/Connect4.re:118:33-35
+  
+  116 ┆ | (State(Win(_), _), _)
+  117 ┆ | (State(Draw, _), _) => inState
+  118 ┆ | (State(Ongoing(player), mat), Move(x)) => 
+  119 ┆   if (player == P1) {
+  120 ┆     failwith ("make the corresponding tile 1")
+  
+  unused variable mat.
+  
+
+  Warning number 27
+  /Users/gahalahd/Documents/cs17/project/game/Connect4/src/Connect4.re:118:44
+  
+  116 ┆ | (State(Win(_), _), _)
+  117 ┆ | (State(Draw, _), _) => inState
+  118 ┆ | (State(Ongoing(player), mat), Move(x)) => 
+  119 ┆   if (player == P1) {
+  120 ┆     failwith ("make the corresponding tile 1")
+  
+  unused variable x.
+  
+
+  Warning number 27
+  /Users/gahalahd/Documents/cs17/project/game/Connect4/src/Connect4.re:160:17-19
+  
+  158 ┆ switch (str) {
+  159 ┆ | _ => try(Move(int_of_string(str))) {
+  160 ┆ | Failure(msg) => {
+  161 ┆   failwith("please pick an integer corresponding to the column you wa
+        nt to 
+  162 ┆               drop your piece! (0~6)")
+  
+  unused variable msg.
+  
+#Done(1668909969694)

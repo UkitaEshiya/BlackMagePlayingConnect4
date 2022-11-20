@@ -31,29 +31,6 @@ function initialState(s) {
         };
 }
 
-function makeBoard(s) {
-  var match = s._1;
-  if (match) {
-    return {
-            hd: match.hd,
-            tl: match.tl
-          };
-  } else {
-    return Pervasives.failwith("other");
-  }
-}
-
-function mainDiagonal(ma) {
-  if (ma) {
-    return {
-            hd: List.hd(ma.hd),
-            tl: mainDiagonal(List.map(List.tl, ma.tl))
-          };
-  } else {
-    return /* [] */0;
-  }
-}
-
 function gameStatus(inState) {
   return inState._0;
 }
@@ -79,10 +56,6 @@ function makeMove(num) {
   return /* Move */{
           _0: num
         };
-}
-
-function checkNthSlot(num, lst) {
-  return List.nth(lst, num) === 0;
 }
 
 function makeMoveList(_lst) {
@@ -168,7 +141,7 @@ CS17SetupGame$Game.checkExpect(makeMoveList({
 function legalMoves(inState) {
   var match = inState._1;
   if (match) {
-    return List.map(makeMove, makeMoveList(match.hd));
+    return List.rev_map(makeMove, makeMoveList(match.hd));
   } else {
     return Pervasives.failwith("invalid game state");
   }
@@ -218,11 +191,11 @@ CS17SetupGame$Game.checkExpect(legalMoves(/* State */{
           }
         }), {
       hd: /* Move */{
-        _0: 5
+        _0: 1
       },
       tl: {
         hd: /* Move */{
-          _0: 4
+          _0: 2
         },
         tl: {
           hd: /* Move */{
@@ -230,11 +203,11 @@ CS17SetupGame$Game.checkExpect(legalMoves(/* State */{
           },
           tl: {
             hd: /* Move */{
-              _0: 2
+              _0: 4
             },
             tl: {
               hd: /* Move */{
-                _0: 1
+                _0: 5
               },
               tl: /* [] */0
             }
@@ -242,6 +215,31 @@ CS17SetupGame$Game.checkExpect(legalMoves(/* State */{
         }
       }
     }, "legalMoves all column open");
+
+function checkOpenRow(_board, column) {
+  while(true) {
+    var board = _board;
+    if (!board) {
+      return Pervasives.failwith("checkOpenRow cannot find open row to drop piece");
+    }
+    if (List.nth(board.hd, column) === 0) {
+      return List.length(board);
+    }
+    _board = board.tl;
+    continue ;
+  };
+}
+
+function nextState(inState, inMove) {
+  var player = inState._0;
+  if (typeof player === "number" || player.TAG === /* Win */0) {
+    return inState;
+  } else if (player._0 === /* P1 */0) {
+    return Pervasives.failwith("make the corresponding tile 1");
+  } else {
+    return Pervasives.failwith("make the corresponding tile -1");
+  }
+}
 
 function estimateValue(inState) {
   var match = inState._0;
@@ -300,23 +298,34 @@ function moveOfString(str, param) {
   }
 }
 
+function mainDiagonal(ma) {
+  if (ma) {
+    return {
+            hd: List.hd(ma.hd),
+            tl: mainDiagonal(List.map(List.tl, ma.tl))
+          };
+  } else {
+    return /* [] */0;
+  }
+}
+
 var Connect4 = {
   makeList: makeList,
   initialState: initialState,
-  makeBoard: makeBoard,
-  mainDiagonal: mainDiagonal,
   gameStatus: gameStatus,
   otherPlayer: otherPlayer,
   currentPlayer: currentPlayer,
   makeMove: makeMove,
-  checkNthSlot: checkNthSlot,
   makeMoveList: makeMoveList,
   legalMoves: legalMoves,
+  checkOpenRow: checkOpenRow,
+  nextState: nextState,
   estimateValue: estimateValue,
   stringOfPlayer: stringOfPlayer,
   stringOfState: stringOfState,
   stringOfMove: stringOfMove,
-  moveOfString: moveOfString
+  moveOfString: moveOfString,
+  mainDiagonal: mainDiagonal
 };
 
 exports.Connect4 = Connect4;

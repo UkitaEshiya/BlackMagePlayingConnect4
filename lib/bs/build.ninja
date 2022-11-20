@@ -1,0 +1,44 @@
+rescript = 1
+rule astj
+  command = /Users/gahalahd/Documents/cs17/project/game/Connect4/node_modules/bs-platform/darwin/bsc.exe  -warn-error +101 -bs-v 9.0.2  -absname -bs-ast -o $out $i
+o src/Demo.ast : astj ../../src/Demo.re
+rule deps
+  command = /Users/gahalahd/Documents/cs17/project/game/Connect4/node_modules/bs-platform/darwin/bsb_helper.exe -hash 726b592355b2c9a14a0d84e61bb351f9 -bs-ns Game $in
+  restat = 1
+o src/Demo.d : deps src/Demo.ast
+rule mij
+  command = /Users/gahalahd/Documents/cs17/project/game/Connect4/node_modules/bs-platform/darwin/bsc.exe -bs-ns Game -I . -I src/node_modules/.lsp -I src/node_modules -I src   -warn-error +101 -bs-package-name game -bs-package-output commonjs:$in_d:.bs.js $i
+  dyndep = 1
+  restat = 1
+o src/Demo-Game.cmj src/Demo-Game.cmi ../../src/Demo.bs.js : mij src/Demo.ast
+o src/Game.ast : astj ../../src/Game.re
+o src/Game.d : deps src/Game.ast
+o src/Game-Game.cmj src/Game-Game.cmi ../../src/Game.bs.js : mij src/Game.ast
+o src/Player.ast : astj ../../src/Player.re
+o src/Player.d : deps src/Player.ast
+o src/Player-Game.cmj src/Player-Game.cmi ../../src/Player.bs.js : mij src/Player.ast
+o src/connect.ast : astj ../../src/connect.re
+o src/connect.d : deps src/connect.ast
+o src/connect-Game.cmj src/connect-Game.cmi ../../src/connect.bs.js : mij src/connect.ast
+o src/Referee.ast : astj ../../src/Referee.re
+o src/Referee.d : deps src/Referee.ast
+o src/Referee-Game.cmj src/Referee-Game.cmi ../../src/Referee.bs.js : mij src/Referee.ast
+o src/AIPlayer.ast : astj ../../src/AIPlayer.re
+o src/AIPlayer.d : deps src/AIPlayer.ast
+o src/AIPlayer-Game.cmj src/AIPlayer-Game.cmi ../../src/AIPlayer.bs.js : mij src/AIPlayer.ast
+o src/Connect4.ast : astj ../../src/Connect4.re
+o src/Connect4.d : deps src/Connect4.ast
+o src/Connect4-Game.cmj src/Connect4-Game.cmi ../../src/Connect4.bs.js : mij src/Connect4.ast
+o src/HumanPlayer.ast : astj ../../src/HumanPlayer.re
+o src/HumanPlayer.d : deps src/HumanPlayer.ast
+o src/HumanPlayer-Game.cmj src/HumanPlayer-Game.cmi ../../src/HumanPlayer.bs.js : mij src/HumanPlayer.ast
+o src/CS17SetupGame.ast : astj ../../src/CS17SetupGame.re
+o src/CS17SetupGame.d : deps src/CS17SetupGame.ast
+o src/CS17SetupGame-Game.cmj src/CS17SetupGame-Game.cmi ../../src/CS17SetupGame.bs.js : mij src/CS17SetupGame.ast
+o src/ReadLineSyncTest.ast : astj ../../src/ReadLineSyncTest.re
+o src/ReadLineSyncTest.d : deps src/ReadLineSyncTest.ast
+o src/ReadLineSyncTest-Game.cmj src/ReadLineSyncTest-Game.cmi ../../src/ReadLineSyncTest.bs.js : mij src/ReadLineSyncTest.ast
+rule build_package
+  command = /Users/gahalahd/Documents/cs17/project/game/Connect4/node_modules/bs-platform/darwin/bsc.exe -w -49 -color always -no-alias-deps  $i
+  restat = 1
+o Game.cmi : build_package Game.mlmap

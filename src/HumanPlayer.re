@@ -1,5 +1,5 @@
 open Game;
-/*
+
 module HumanPlayer = (MyGame: Game) => {
   module PlayerGame = MyGame;
 
@@ -37,4 +37,3 @@ module TestGame = Connect4.Connect4;
 module TestHumanPlayer = HumanPlayer(TestGame);
 module MyHumanPlayer:Player = TestHumanPlayer;
 open! TestHumanPlayer;
-*/
